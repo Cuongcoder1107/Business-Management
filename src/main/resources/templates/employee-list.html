@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a th:href="@{/employees/new}">Add New Employee</a>
+    <form th:action="@{/employees/findbyId}" method="get">
+      <input type="number" name="id" placeholder="Find by id" />
+      <button type="submit">Search</button>
+    </form>
+    <form th:action="@{/employees/findbyname}" method="get">
+      <input type="text" name="name" placeholder="Find by name" />
+      <button type="submit">Search</button>
+    </form>
+    <form th:action="@{/employees/findbyposition}" method="get">
+      <input type="text" name="position" placeholder="Find by position" />
+      <button type="submit">Search</button>
+    </form>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>PLACE</th>
+          <th>POSITION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="employee : ${employeeList}">
+          <td th:text="${employee.id}"></td>
+          <td th:text="${employee.name}"></td>
+          <td th:text="${employee.place}"></td>
+          <td th:text="${employee.position}"></td>
+          <td>
+            <a
+              th:href="@{'/employees/delete/' + ${employee.id}}"
+              onclick="alert('Do you want to delete')"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
